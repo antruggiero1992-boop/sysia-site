@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SYSIA — Work in Progress</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at top, rgba(0,255,255,0.12), transparent 35%),
+        linear-gradient(135deg, #060816, #0b1020 50%, #05070f);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 24px;
+    }
+    .card {
+      width: 100%;
+      max-width: 760px;
+      padding: 48px 32px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+    .tag {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,255,255,0.25);
+      color: #7ef9ff;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-size: 56px;
+      letter-spacing: 2px;
+    }
+    p {
+      margin: 0 auto;
+      max-width: 560px;
+      font-size: 18px;
+      line-height: 1.7;
+      color: #b9c3d9;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="tag">Coming Soon</div>
+    <h1>SYSIA</h1>
+    <p>
+      Stiamo costruendo una startup che trasforma l’intelligenza artificiale
+      in soluzioni concrete per aziende e professionisti.
+      Il sito ufficiale sarà presto online.
+    </p>
+  </div>
+</body>
+</html>
