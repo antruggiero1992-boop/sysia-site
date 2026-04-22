@@ -3,67 +3,384 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SYSIA Online</title>
+  <title>SYSIA — Launching Soon</title>
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #05070d;
+      --bg2: #0a1020;
+      --card: rgba(255,255,255,0.05);
+      --border: rgba(255,255,255,0.10);
+      --text: #f5f7ff;
+      --muted: #a9b3c9;
+      --cyan: #43d6ff;
+      --violet: #7a6cff;
+      --violet-soft: rgba(122,108,255,0.25);
+      --cyan-soft: rgba(67,214,255,0.20);
+    }
+
     body {
       margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(67,214,255,0.16), transparent 28%),
+        radial-gradient(circle at 85% 25%, rgba(122,108,255,0.16), transparent 28%),
+        radial-gradient(circle at 50% 100%, rgba(67,214,255,0.08), transparent 35%),
+        linear-gradient(135deg, var(--bg), var(--bg2) 55%, #04050a);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .grid {
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent 90%);
+      pointer-events: none;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 40px 22px 60px;
+    }
+
+    .hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      background:
-        radial-gradient(circle at top, rgba(0,255,255,0.12), transparent 35%),
-        linear-gradient(135deg, #060816, #0b1020 50%, #05070f);
-      color: #fff;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 24px;
     }
-    .card {
+
+    .panel {
       width: 100%;
-      max-width: 760px;
-      padding: 48px 32px;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px;
+      max-width: 1050px;
+      padding: 48px 34px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
       background: rgba(255,255,255,0.04);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      backdrop-filter: blur(14px);
+      box-shadow:
+        0 20px 80px rgba(0,0,0,0.45),
+        inset 0 1px 0 rgba(255,255,255,0.04);
     }
-    .tag {
-      display: inline-block;
-      margin-bottom: 18px;
-      padding: 8px 14px;
+
+    .top-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
       border-radius: 999px;
-      border: 1px solid rgba(0,255,255,0.25);
-      color: #7ef9ff;
-      font-size: 12px;
-      letter-spacing: 2px;
+      border: 1px solid rgba(67,214,255,0.30);
+      background: rgba(255,255,255,0.03);
+      color: #c8f6ff;
+      font-size: 13px;
+      letter-spacing: 1.4px;
       text-transform: uppercase;
+      margin-bottom: 24px;
     }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .logo-box {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .logo-box img {
+      width: 230px;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 10px 30px rgba(67,214,255,0.12));
+    }
+
     h1 {
-      margin: 0 0 14px;
-      font-size: 56px;
-      letter-spacing: 2px;
+      margin: 0 0 18px;
+      font-size: clamp(40px, 7vw, 78px);
+      line-height: 0.98;
+      letter-spacing: -2px;
     }
-    p {
-      margin: 0 auto;
-      max-width: 560px;
-      font-size: 18px;
+
+    .accent {
+      background: linear-gradient(90deg, var(--cyan), #78cfff, var(--violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .sub {
+      margin: 0 0 28px;
+      max-width: 650px;
+      font-size: 19px;
       line-height: 1.7;
-      color: #b9c3d9;
+      color: var(--muted);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .pill {
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .pill.primary {
+      border-color: rgba(67,214,255,0.35);
+      box-shadow: 0 0 0 1px rgba(67,214,255,0.08) inset;
+    }
+
+    .mini-note {
+      font-size: 14px;
+      color: #9fc3d0;
+      opacity: 0.95;
+    }
+
+    .right-box {
+      position: relative;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .orb.cyan {
+      width: 180px;
+      height: 180px;
+      background: var(--cyan-soft);
+      top: -40px;
+      right: 40px;
+    }
+
+    .orb.violet {
+      width: 220px;
+      height: 220px;
+      background: var(--violet-soft);
+      bottom: -30px;
+      left: 20px;
+    }
+
+    .glass-card {
+      position: relative;
+      z-index: 2;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      padding: 26px;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.35);
+    }
+
+    .glass-card h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .glass-card p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 15px;
+    }
+
+    .feature:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .feature span:last-child {
+      color: #c7cfff;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .mini-card {
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.03);
+      padding: 20px;
+    }
+
+    .mini-card .icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .mini-card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .mini-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    footer {
+      margin-top: 26px;
+      text-align: center;
+      color: #92a0bf;
+      font-size: 14px;
+      letter-spacing: 0.3px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .panel {
+        padding: 34px 20px;
+        border-radius: 24px;
+      }
+
+      .logo-box img {
+        width: 180px;
+      }
+
+      .sub {
+        font-size: 17px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="tag">Coming Soon</div>
-    <h1>SYSIA</h1>
-    <p>
-      Stiamo costruendo una startup che trasforma l’intelligenza artificiale
-      in soluzioni concrete per aziende e professionisti.
-      Il sito ufficiale sarà presto online.
-    </p>
+  <div class="grid"></div>
+
+  <div class="wrapper hero">
+    <section class="panel">
+      <div class="top-badge">🚀 Launching Soon • Stay Tuned</div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="logo-box">
+            <img src="logo-sysia.jpeg" alt="SYSIA Logo">
+          </div>
+
+          <h1>
+            Building <span class="accent">AI solutions</span><br>
+            for real businesses.
+          </h1>
+
+          <p class="sub">
+            SYSIA trasforma l’intelligenza artificiale in strumenti concreti per aziende e professionisti:
+            automazione, AI agents, workflow intelligenti e processi più veloci, chiari ed efficienti.
+          </p>
+
+          <div class="cta-row">
+            <div class="pill primary">⚡ Work in Progress</div>
+            <div class="pill">🧠 AI Automation</div>
+            <div class="pill">🤖 Smart Agents</div>
+          </div>
+
+          <div class="mini-note">
+            Something powerful is coming. Stay tuned.
+          </div>
+        </div>
+
+        <div class="right-box">
+          <div class="orb cyan"></div>
+          <div class="orb violet"></div>
+
+          <div class="glass-card">
+            <h2>What we are building</h2>
+            <p>
+              Una piattaforma e un ecosistema di servizi AI pensati per semplificare il lavoro,
+              migliorare la produttività e creare vantaggio competitivo reale.
+            </p>
+
+            <div class="feature">
+              <span>Process Automation</span>
+              <span>Live Soon</span>
+            </div>
+            <div class="feature">
+              <span>AI Agents & Assistants</span>
+              <span>In Development</span>
+            </div>
+            <div class="feature">
+              <span>Operational Intelligence</span>
+              <span>Launching</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-grid">
+        <div class="mini-card">
+          <div class="icon">⚙️</div>
+          <h3>Automation</h3>
+          <p>Riduciamo attività ripetitive e colli di bottiglia con flussi più rapidi e intelligenti.</p>
+        </div>
+
+        <div class="mini-card">
+          <div class="icon">🧩</div>
+          <h3>Integration</h3>
+          <p>Colleghiamo strumenti, dati e processi per costruire sistemi semplici da usare ma potenti.</p>
+        </div>
+
+        <div class="mini-card">
+          <div class="icon">📡</div>
+          <h3>Scalable AI</h3>
+          <p>Soluzioni progettate per crescere insieme al business, senza complessità inutile.</p>
+        </div>
+      </div>
+
+      <footer>
+        SYSIA — AI orchestration for companies & professionals • sysia.io
+      </footer>
+    </section>
   </div>
 </body>
 </html>
